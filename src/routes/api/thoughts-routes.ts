@@ -1,47 +1,23 @@
 import { Router } from 'express';
+import { getAllThoughts, getThoughtById, createThought, updateThought, deleteThought, addReaction, deleteReaction } from '../../controllers/thoughtController';
 
 const router = Router();
 
-// GET - /api/thoughts
-// Get all thoughts data and return as JSON
-router.get('/', (_req, res) => {
-    res.send('All thoughts output here');
-});
+// /api/thoughts
+router.route('/')
+    .get(getAllThoughts) // Get all thoughts data and return as JSON
+    .post(createThought); // Create a new thought
 
-// GET - /api/thoughts/:id
-// Get a single thought by ID and return as JSON
-router.get('/:id', (req, res) => {
-    res.send(`Thought with ID ${req.params.id} output here`);
-});
+// /api/thoughts/:id
+router.route('/:id')
+    .get(getThoughtById) // Get a single thought by ID and return as JSON
+    .put(updateThought) // Update a thought by ID
+    .delete(deleteThought); // Delete a thought by ID
 
 // POST - /api/thoughts
 // Create a new thought
-router.post('/', (_req, res) => {
-    res.send('New thought created');
-});
-
-// PUT - /api/thoughts/:id
-// Update a thought by ID
-router.put('/:id', (req, res) => {
-    res.send(`Thought with ID ${req.params.id} updated`);
-});
-
-// DELETE - /api/thoughts/:id
-// Delete a thought by ID
-router.delete('/:id', (req, res) => {
-    res.send(`Thought with ID ${req.params.id} deleted`);
-});
-
-// POST - /api/thoughts/:thoughtId/reactions
-// Add a new reaction to a thought
-router.post('/:thoughtId/reactions', (req, res) => {
-    res.send(`New reaction added to thought with ID ${req.params.thoughtId}`);
-});
-
-// DELETE - /api/thoughts/:thoughtId/reactions/:reactionId
-// Remove a reaction from a thought
-router.delete('/:thoughtId/reactions/:reactionId', (req, res) => {
-    res.send(`Reaction with ID ${req.params.reactionId} removed from thought with ID ${req.params.thoughtId}`);
-});
+router.route('/:thoughtId/reactions')
+    .post(addReaction) // Add a new reaction to a thought
+    .delete(deleteReaction); // Remove a reaction from a thought
 
 export default router;

@@ -1,48 +1,23 @@
 import { Router } from 'express';
+import { getAllUsers, getUserById, createUser, updateUser, deleteUser, addFriend, deleteFriend } from '../../controllers/userController';
 
 const router = Router();
 
-// GET - /api/users
-// Get all users data and return as JSON
-router.get('/', (_req, res) => {
-    res.send('All users output here');
-});
+// /api/users
+router.route('/')
+    .get(getAllUsers) // Get all users data and return as JSON
+    .post(createUser); // Create a new user
 
-// GET - /api/users/:id
-// Get a single user by ID and return as JSON
-router.get('/:id', (req, res) => {
-    res.send(`User with ID ${req.params.id} output here`);
-});
+// /api/users/:id
+router.route('/:id')
+    .get(getUserById) // Get a single user by ID and return as JSON
+    .put(updateUser) // Update a user by ID
+    .delete(deleteUser); // Delete a user by ID
 
 // POST - /api/users
-// Create a new user
-router.post('/', (_req, res) => {
-    res.send('New user created');
-});
 
-// PUT - /api/users/:id
-// Update a user by ID
-router.put('/:id', (req, res) => {
-    res.send(`User with ID ${req.params.id} updated`);
-});
-
-// DELETE - /api/users/:id
-// Delete a user by ID
-router.delete('/:id', (req, res) => {
-    res.send(`User with ID ${req.params.id} deleted`);
-});
-
-// POST - /api/users/:userId/friends/:friendId
-// Add a new friend to a user's friend list
-router.post('/:userId/friends/:friendId', (req, res) => {
-    res.send(`Friend with ID ${req.params.friendId} added to user with ID ${req.params.userId}`);
-});
-
-// DELETE - /api/users/:userId/friends/:friendId
-// Remove a friend from a user's friend list
-router.delete('/:userId/friends/:friendId', (req, res) => {
-    res.send(`Friend with ID ${req.params.friendId} removed from user with ID ${req.params.userId}`);
-});
-
+router.route('/:userId/friends/:friendId')
+    .post(addFriend) // Add a new friend to a user's friend list
+    .delete(deleteFriend); // Remove a friend from a user's friend list
 
 export default router;
