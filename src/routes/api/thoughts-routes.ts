@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllThoughts, getThoughtById, createThought, updateThought, deleteThought, addReaction, deleteReaction } from '../../controllers/thoughtController';
+import { getAllThoughts, getThoughtById, createThought, updateThought, deleteThought, addReaction, deleteReaction } from '../../controllers/thoughtController.js';
 
 const router = Router();
 
@@ -14,10 +14,11 @@ router.route('/:id')
     .put(updateThought) // Update a thought by ID
     .delete(deleteThought); // Delete a thought by ID
 
-// POST - /api/thoughts
-// Create a new thought
+// /api/thoughts/:thoughtId/reactions
 router.route('/:thoughtId/reactions')
-    .post(addReaction) // Add a new reaction to a thought
+    .post(addReaction); // Add a new reaction to a thought
+
+router.route('/:thoughtId/reactions/:reactionId')
     .delete(deleteReaction); // Remove a reaction from a thought
 
 export default router;

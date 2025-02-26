@@ -19,8 +19,11 @@ const userSchema = new Schema<IUser>({
         required: true,
         unique: true,
         validate: {
-            validator: () => Promise.resolve(false),
-            message: 'Email validation failed'
+            validator: function(email: string) {
+                // RFC 5322 compliant email regex
+                return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+            },
+            message: 'Please enter a valid email address'
         }
     },
     thoughts: [
@@ -39,7 +42,8 @@ const userSchema = new Schema<IUser>({
     {
         toJSON: {
             virtuals: true
-        }
+        },
+        id: false
     }
 );
 
