@@ -25,6 +25,8 @@ This server application utilizes the Mongoose ODM to provide a REST API for a mo
 
 ## Usage
 
+[Here is a video walkthrough of the application.](https://youtu.be/gzal4JrCF5M)
+
 There are two main routes, /api/users and /api/thoughts.
 
 ### /api/users
@@ -82,7 +84,7 @@ POST request - Add a new reaction to a thought
     "username": "<string>"
 }
 
-### /api/thoughts/:thoughtId/reaction/:reactionId
+### /api/thoughts/:thoughtId/reactions/:reactionId
 
 DELETE request - Remove a reaction from a thought by ID
 
