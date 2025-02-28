@@ -1,4 +1,4 @@
-# Candidate Search
+# Social Network API
 
 ## Description
 
